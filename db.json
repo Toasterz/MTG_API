@@ -1,4 +1,15 @@
 {
   "MTGcards": [],
-  "cards": []
+  "cards": [
+    {
+      "id": "b7c6ea51-50a0-4e58-a434-f1660dacae9f"
+    },
+    {
+      "id": "14e106e7-c941-4bff-9d23-75af169bcad3",
+      "name": "Abbot of Keral Keep"
+    },
+    {
+      "id": "f7016f10-4689-4b12-a892-2fd54f2202d9"
+    }
+  ]
 }
