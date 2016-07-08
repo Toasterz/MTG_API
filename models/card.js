@@ -1,8 +1,8 @@
-function card (name)
+function Card (name)
 {
   this.name = name;
   this.CMC = CMC;
   this.price = price;
 }
 
-module.exports = card;
+module.exports = Card;

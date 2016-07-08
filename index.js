@@ -2,18 +2,16 @@ var express = require("express");
 var bodyParser = require ("body-parser");
 var lowdb = require("lowdb");
 var uuid = require ("uuid");
-
 var server = express();
 var port = process.env.PORT || 8080;
 var db = lowdb("db.json");
-var card = require ('./models/card.js')
+var card = require ('./models/card.js');
 
 //Initialize the database
 db.defaults({cards: []})
   .value();
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
-
 
 server.get('/cards', function(req, res)
 {
@@ -22,17 +20,16 @@ server.get('/cards', function(req, res)
   res.send(result);
 });
 
-server.get('/cards/id', function (req, res)
+server.get('/cards/name', function (req, res)
 {
-  var todo = db.get('cards')
-            .find({id: req.params.id})
+  var card = db.get('cards')
+            .find({name: req.params.name})
             .value();
 res.send(todo);
 });
-
 server.post('/cards', function(req, res)
 {
-  var card = new card(request.body.name);
+  var card = new Card(req.body.name);
   var result = db.get('cards')
                   .push(card)
                   .last()
@@ -40,24 +37,20 @@ server.post('/cards', function(req, res)
 res.send(result);
 });
 
-server.put('/cards/id', function(req, res)
+server.put('/cards/name', function(req, res)
 {
-  var updatedCardInfo = {
-    name: req.body.name,
-    CMC: req.body.CMC,
-    price: req.body.price,
-  };
+  var card = new Card (req.body.name, req.body.name);
   var updatedInfo = db.get('cards')
-                      .find({id: req.params.id})
+                      .find({name: req.params.name})
                       .assign(updatedCardInfo)
                       .value();
   res.send(updatedInfo);
 });
 
-server.delete('/cards/id', function(req, res)
+server.delete('/cards/name', function(req, res)
 {
   var card = db.get('cards')
-              .remove({id: req.params.id})
+              .remove({name: req.params.name})
               .value()
   res.send(card);
 })
