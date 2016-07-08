@@ -6,6 +6,7 @@ var uuid = require ("uuid");
 var server = express();
 var port = process.env.PORT || 8080;
 var db = lowdb("db.json");
+var card = require ('./models/card.js')
 
 //Initialize the database
 db.defaults({cards: []})
@@ -31,12 +32,7 @@ res.send(todo);
 
 server.post('/cards', function(req, res)
 {
-  var card = {
-    id: uuid.v4(),
-    name: req.body.name,
-    CMC: req.body.cmc,
-    price: req.body.price,
-  };
+  var card = new card(request.body.name);
   var result = db.get('cards')
                   .push(card)
                   .last()
